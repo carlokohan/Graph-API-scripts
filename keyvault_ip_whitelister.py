@@ -4,6 +4,7 @@ from subprocess import PIPE, run
 
 import json
 import requests
+import smtplib
 import subprocess
 import traceback
 
@@ -12,6 +13,14 @@ constant_ip_list = ["x/32", "x/32", "x/32"]
 def send_email(error_str):
     print("Sending email...\n")
     print(error_str)
+    host = "xxx.xxx.com"
+    server = smtplib.SMTP(host)
+    FROM = "xxx@xxx.com"
+    TO = "x@xxx.com"
+    MSG = "Subject: KeyVault IP whitelist script\n\nCheck error:\n" + error_str
+    server.sendmail(FROM, TO, MSG)
+    server.quit()
+    print("Email Sent")
 
 def download_ip_list():
     relative_week = -1
